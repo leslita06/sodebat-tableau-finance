@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F6F8FB">
+<title>SODEBAT, finance et trésorerie</title>
+<link rel="icon" href="assets/symbole.png?v=20261125f">
+<link rel="preload" href="assets/Inter.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="assets/style.css?v=20261125f">
+<link rel="stylesheet" href="assets/sodebat.css?v=20261125f">
+<link rel="stylesheet" href="assets/finance.css?v=20261125f">
+</head>
+<body>
+<div class="app" id="app">
+
+<aside class="side" aria-label="Navigation">
+  <div class="brand"><img src="assets/logo-sodebat.png?v=20261125f" alt="SODEBAT Ascenseurs Côte d'Ivoire" class="logo-l"></div>
+  <p class="bs2">Finance et trésorerie</p>
+  <nav class="nav">
+    <p class="nl">Piloter</p>
+    <button class="ni" data-v="ensemble"><i data-i="layout-dashboard"></i>Vue d'ensemble</button>
+    <p class="nl">Facturer et encaisser</p>
+    <button class="ni" data-v="facturer"><i data-i="receipt"></i>Facturation<span class="k" id="k-fa"></span></button>
+    <button class="ni" data-v="encaisser"><i data-i="hand-coins"></i>Encaissements<span class="k red" id="k-en"></span></button>
+    <p class="nl">Prévoir</p>
+    <button class="ni" data-v="tresorerie"><i data-i="wallet"></i>Trésorerie 13 semaines<span class="k red" id="k-tr"></span></button>
+    <button class="ni" data-v="marges"><i data-i="percent"></i>Marges<span class="k red" id="k-ma"></span></button>
+  </nav>
+  <div class="side-f">
+    <span class="pill-demo"><i data-i="info"></i>Données d'exemple</span>
+    <p>Montants en francs CFA. Clients, contrats et montants inventés pour montrer le fonctionnement.</p>
+  </div>
+</aside>
+
+<div class="main">
+  <header class="bar">
+    <div class="bar-in">
+      <img src="assets/logo-sodebat.png?v=20261125f" alt="SODEBAT" class="brand-m">
+      <div class="crumb"><span class="grp">Finance</span><i data-i="chevron-right" class="sep"></i><b id="crumb-v">Vue d'ensemble</b></div>
+      <div class="bar-r"><span class="asof">Situation au <b id="date"></b></span></div>
+    </div>
+    <div class="fbar" id="fbar">
+      <div class="sel" id="c-s"><button class="sel-b" id="c-b"><i data-i="users"></i><span id="c-l">Tous les clients</span><i data-i="chevron-down"></i></button><div class="menu" id="c-m"></div></div>
+      <div class="sel" id="z-s"><button class="sel-b" id="z-b"><i data-i="map-pin"></i><span id="z-l">Toutes les zones</span><i data-i="chevron-down"></i></button><div class="menu" id="z-m"></div></div>
+      <button class="freset" id="f-x"><i data-i="x"></i>Effacer</button>
+      <span class="hz" id="hz"><i data-i="calendar-range"></i>Toute l'entreprise, 13 semaines</span>
+    </div>
+  </header>
+
+  <main class="content">
+
+  <!-- ===== Vue d'ensemble ===== -->
+  <section class="view" id="v-ensemble">
+    <div class="vh"><h1>Finance de la semaine</h1><p class="lede" id="lede-e"></p></div>
+    <div class="kstrip k3" id="kpis-e"></div>
+    <div class="sh"><h2><i data-i="gavel"></i>Décisions à prendre</h2><p class="hint">Chaque carte ouvre le détail et l'action préparée.</p></div>
+    <div class="dec" id="dec"></div>
+    <div class="g21">
+      <div class="card">
+        <div class="card-h"><p class="t">Facturé et encaissé, 12 mois</p><p class="u">millions FCFA</p></div>
+        <div class="card-b"><div class="ch"><canvas id="c-fe"></canvas></div></div>
+        <div class="legend"><span><i style="background:#004AAD"></i>Maintenance facturée</span><span><i style="background:#38B6FF"></i>Travaux facturés</span><span><i class="ln"></i>Encaissé</span></div>
+      </div>
+      <div class="card">
+        <div class="card-h"><p class="t">Créances par ancienneté</p><p class="u">TTC</p></div>
+        <div class="card-b"><div class="ch dn"><canvas id="c-age"></canvas><div class="dnc" id="dnc"></div></div></div>
+        <div class="legend" id="l-age"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Facturation ===== -->
+  <section class="view" id="v-facturer">
+    <div class="vh"><h1>Facturation des contrats et des chantiers</h1><p class="lede" id="lede-f"></p></div>
+    <div class="kstrip k3" id="kpis-f"></div>
+    <div class="sh"><h2><i data-i="calendar-clock"></i>Factures de maintenance à émettre</h2><button class="btn pri sm" id="b-emit"><i data-i="file-check"></i>Préparer les factures de décembre</button></div>
+    <div class="g21 g21t">
+      <div class="card">
+        <div class="card-h"><p class="t">Montant à facturer par mois</p><p class="u">HT, selon le rythme du contrat</p></div>
+        <div class="card-b"><div class="ch"><canvas id="c-cal"></canvas></div></div>
+        <div class="legend"><span><i style="background:#004AAD"></i>Mensuel</span><span><i style="background:#38B6FF"></i>Trimestriel</span><span><i style="background:#9DB9DF"></i>Trimestre échu, public</span><span><i style="background:#3A3A3B"></i>Annuel</span></div>
+      </div>
+      <div class="card"><div class="card-h"><p class="t" id="em-t">Décembre</p><p class="u" id="em-u"></p></div><div id="em-l" class="scl"></div></div>
+    </div>
+    <div class="sh"><h2><i data-i="layers"></i>Chantiers facturés par jalons</h2><p class="hint">Acompte 40 %, livraison 30 %, mise en service 25 %, retenue de garantie 5 % libérée à un an.</p></div>
+    <div class="card"><div id="jal"></div></div>
+    <div class="toolbar mt"><div class="seg" id="seg-ct"></div><label class="srch"><i data-i="search"></i><input type="search" id="q-ct" placeholder="Client, contrat" aria-label="Chercher un contrat"></label></div>
+    <div class="card tblc"><table class="tbl" id="t-ct"></table></div>
+    <p class="fnote">Les factures de maintenance sont calculées à partir du parc sous contrat : nombre d'appareils, prix annuel, rythme de facturation. Les établissements publics sont facturés à terme échu, au trimestre. Rien n'est envoyé depuis cette page : chaque lot est validé avant émission.</p>
+  </section>
+
+  <!-- ===== Encaissements ===== -->
+  <section class="view" id="v-encaisser">
+    <div class="vh"><h1>Encaissements et relances</h1><p class="lede" id="lede-n"></p></div>
+    <div class="kstrip k3" id="kpis-n"></div>
+    <div class="g2 mt">
+      <div class="card">
+        <div class="card-h"><p class="t">Balance âgée par type de client</p><p class="u">échu, TTC</p></div>
+        <div class="card-b"><div class="ch"><canvas id="c-bal"></canvas></div></div>
+        <div class="legend"><span><i style="background:#9DC8F0"></i>0 à 30 j</span><span><i style="background:#38B6FF"></i>31 à 60 j</span><span><i style="background:#004AAD"></i>61 à 90 j</span><span><i style="background:#C8352B"></i>Plus de 90 j</span></div>
+      </div>
+      <div class="card">
+        <div class="card-h"><p class="t">Délai moyen de paiement</p><p class="u">jours entre facture et règlement, depuis juin</p></div>
+        <div class="card-b"><div class="hb" id="hb-dl"></div></div>
+        <p class="note" id="n-dl"></p>
+      </div>
+    </div>
+    <div class="sh"><h2><i data-i="bell-ring"></i>Relances proposées</h2><p class="hint">Message prêt, adapté au client. Rien ne part sans validation.</p></div>
+    <div class="toolbar"><div class="seg" id="seg-ag"></div></div>
+    <div class="card tblc"><table class="tbl" id="t-rel"></table></div>
+  </section>
+
+  <!-- ===== Trésorerie ===== -->
+  <section class="view" id="v-tresorerie">
+    <div class="vh"><h1>Trésorerie sur 13 semaines</h1><p class="lede" id="lede-t"></p></div>
+    <div class="kstrip k3" id="kpis-t"></div>
+    <div class="card mt">
+      <div class="card-h"><p class="t">Solde de fin de semaine</p><div class="seg sm" id="seg-sc"><button data-s="0" class="on">Prévision</button><button data-s="1">Si le public paie 30 j plus tard</button></div></div>
+      <div class="card-b"><div class="ch tall"><canvas id="c-tr"></canvas></div></div>
+      <div class="legend"><span><i style="background:#9DC8F0"></i>Encaissements</span><span><i style="background:#3A3A3B"></i>Décaissements</span><span><i style="background:#004AAD;height:3px;width:14px"></i>Solde</span><span><i class="ln red"></i>Seuil de sécurité 30 M</span></div>
+    </div>
+    <div class="g2 mt">
+      <div class="card">
+        <div class="card-h"><p class="t">Du solde d'aujourd'hui au solde du 21 février</p><p class="u">millions FCFA</p></div>
+        <div class="card-b"><div class="ch"><canvas id="c-wf"></canvas></div></div>
+      </div>
+      <div class="card">
+        <div class="card-h"><p class="t">Paiements aux usines en euros</p><p class="u">parité fixe 655,957</p></div>
+        <div id="usi"></div>
+        <p class="note">Le franc CFA est arrimé à l'euro : pas de risque de change sur SODIMAS et IMEM, seulement des frais de virement international et le calendrier des soldes avant expédition.</p>
+      </div>
+    </div>
+    <div class="sh"><h2><i data-i="table"></i>Semaine par semaine</h2><p class="hint">Cliquez une semaine pour voir chaque ligne.</p></div>
+    <div class="card tblc"><table class="tbl" id="t-tr"></table></div>
+    <div class="g2 mt">
+      <div class="card"><div class="card-h"><p class="t">Disponible aujourd'hui</p><p class="u" id="cpt-u"></p></div><div id="cpt"></div></div>
+      <div class="card"><div class="card-h"><p class="t">Hypothèses retenues</p></div>
+        <ul class="hyp"><li>Factures non échues payées au délai habituel du type de client (public : 40 jours après l'échéance).</li><li>Retards de plus de 30 jours : encaissement en 2 à 6 semaines après relance.</li><li>Résidence Les Orchidées exclue de la prévision (impayé de 90 jours).</li><li>Retenues de garantie exclues (libérées à un an).</li><li>Salaires le dernier jour ouvré, gratification versée le 18 décembre.</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Marges ===== -->
+  <section class="view" id="v-marges">
+    <div class="vh"><h1>Marge par contrat et par chantier</h1><p class="lede" id="lede-m"></p></div>
+    <div class="kstrip k3" id="kpis-m"></div>
+    <div class="g2 mt">
+      <div class="card">
+        <div class="card-h"><p class="t">Contrats de maintenance</p><p class="u">prix annuel et marge</p></div>
+        <div class="card-b"><div class="ch tall"><canvas id="c-sc"></canvas></div></div>
+        <p class="note">Une bulle par contrat, sa taille suit le nombre d'appareils. Coûts directs : visites mensuelles, pannes, pièces d'usure, déplacements.</p>
+      </div>
+      <div class="card">
+        <div class="card-h"><p class="t">Chantiers : marge prévue et marge estimée</p><p class="u">% du prix</p></div>
+        <div class="card-b"><div class="ch tall"><canvas id="c-chm"></canvas></div></div>
+        <p class="note">L'écart vient des jours de retard (équipe immobilisée, frais de chantier).</p>
+      </div>
+    </div>
+    <div class="toolbar mt"><div class="seg" id="seg-mg"><button data-m="ct" class="on">Contrats</button><button data-m="ch">Chantiers</button></div></div>
+    <div class="card tblc"><table class="tbl" id="t-mg"></table></div>
+  </section>
+
+  <footer class="foot">
+    <p><b>Données d'exemple.</b> Seuls le nom de SODEBAT Ascenseurs Côte d'Ivoire, ses métiers et ses usines partenaires (SODIMAS, IMEM) sont réels. Clients, contrats, factures, soldes bancaires et coûts sont inventés pour montrer le fonctionnement de l'outil. Montants en francs CFA, TVA à 18 %.</p>
+  </footer>
+  </main>
+</div>
+</div>
+
+<nav class="tabbar" aria-label="Navigation">
+  <button data-v="ensemble"><i data-i="layout-dashboard"></i><span>Ensemble</span></button>
+  <button data-v="facturer"><i data-i="receipt"></i><span>Factures</span></button>
+  <button data-v="encaisser"><i data-i="hand-coins"></i><span>Encaisser</span><em id="m-en"></em></button>
+  <button data-v="tresorerie"><i data-i="wallet"></i><span>Trésorerie</span><em id="m-tr"></em></button>
+  <button data-v="marges"><i data-i="percent"></i><span>Marges</span></button>
+</nav>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="dr-h"><span id="dr-k"></span><button class="x" id="dr-x" aria-label="Fermer"><i data-i="x"></i></button></div>
+  <div class="dr-b" id="dr-b"></div>
+</aside>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="assets/chart.umd.min.js?v=4"></script>
+<script src="assets/icons.js?v=20261125f"></script>
+<script src="assets/data.js?v=20261125f"></script>
+<script src="assets/app.js?v=20261125f"></script>
+</body>
+</html>
